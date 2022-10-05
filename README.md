@@ -80,7 +80,7 @@ on three places.
 
 For lazy people, just make a soft link to your document root directory in your termux home ($HOME).
 ```
-place soft link inside termux home
+# place soft link inside termux home
 ln -s $PREFIX/share/nginx/html $HOME/htdocs
 ```
 
