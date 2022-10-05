@@ -45,22 +45,22 @@ error_log  /data/data/com.termux/files/usr/var/log/nginx/error.log;
 
 Set your root location block as:
 ```
-    location / {
-        root   /data/data/com.termux/files/usr/share/nginx/html;
-        index  index.php index.html index.htm;
-        try_files $uri $uri/ /index.html;
-    }
+location / {
+    root   /data/data/com.termux/files/usr/share/nginx/html;
+    index  index.php index.html index.htm;
+    try_files $uri $uri/ /index.html;
+}
 ```
 
 Uncomment and edit your php (`\.php$`) location block to look like:
 ```
-    location ~ \.php$ {
-	    try_files $uri =404;
-        root           /data/data/com.termux/files/usr/share/nginx/html;
-	    fastcgi_pass unix:/data/data/com.termux/files/usr/var/run/php-fpm.sock;
-        fastcgi_index  index.php;
-        fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    }
+location ~ \.php$ {
+    try_files $uri =404;
+    root           /data/data/com.termux/files/usr/share/nginx/html;
+    fastcgi_pass unix:/data/data/com.termux/files/usr/var/run/php-fpm.sock;
+    fastcgi_index  index.php;
+    fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+}
 ```
 
 The original configuration file with proposed changes is included in the repo as `nginx.conf.full`. There's another cleaned up copy with comments & unnecessary configurations removed named as `nginx.conf`.
