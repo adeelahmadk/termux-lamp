@@ -1,5 +1,28 @@
 # LEMP Setup on Android
 
+![LEMP stack illustration](res/lemp-stack.jpg)
+
+LEMP is a variation of the ubiquitous LAMP stack used for developing and deploying web applications written in PHP. Traditionally, LAMP consists of Linux, Apache, MySQL, and PHP. Due to its modular nature, the components can easily be swapped out. With LEMP, Apache is replaced with the lightweight yet powerful Nginx.
+
+A LAMP/LEMP stack may be setup in a variety of flavors:
+
+- lnmp(Linux + Nginx+ MySQL/MongoDB+ PHP)
+- lamp(Linux + Apache+ MySQL/MongoDB+ PHP)
+- lnmpa(Linux + Nginx+ MySQL/MongoDB+ PHP+ Apache):Nginx handling the static, Apache processing dynamic PHP
+- lnpp(Linux + Nginx+ PostgreSQL+ PHP)
+- lapp(Linux + Apache+ PostgreSQL+ PHP)
+
+Commonly a LEMP Stack is setup on desktop or server Linux like:
+- CentOS(redhat) 7~8
+- Debian 8～11
+- Ubuntu 16～22
+- Fedora 27+
+- Amazon Linux 2
+
+However with the evolution of Termux Linux environment for Android OS, it has become possible to setup a multitude of development environments on handheld devices. 
+
+A number of online tutorials have emerged outlining setup process for some development tools. However, I couldn't find a single comprehensive tutorial to guide through the setup of a LEMP (Nginx, MySQL, PHP) stack environment specifically. Therefore, I took upon myself to experiment and produce a single comprehensive tutorial for this purpose.
+
 ## Installation
 
 Inside your termux app install PHP and Nginx.
@@ -158,7 +181,7 @@ To install termux-services, run
 ```
 pkg install termux-services
 ```
-and then *restart termux* so that the service-daemon is started.
+and then **restart termux** so that the service-daemon is started.
 
 To then enable and run a service, run
 ```
