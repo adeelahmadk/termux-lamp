@@ -25,7 +25,7 @@ A number of online tutorials have emerged outlining setup process for some devel
 
 ## Installation
 
-Inside your termux app install PHP and Nginx.
+Inside your termux app install PHP, Nginx and MariaDB
 
 ```sh
 apt update && apt upgrade
@@ -135,6 +135,8 @@ quit;
 
 Verify that you are able to login as 'root' with `mysql -u root -p`. You will need to provide password set in previous step. 
 
+![MariaDB command-line client](res/mariadb_cli.jpg)
+
 Whenever you want to access MySQL database manually through command line or with some program (web application), you need to start MySQL server:
 
 ```
@@ -175,7 +177,7 @@ nginx -s reload
 
 ## Service Automation
 
-termux-services contains a set of scripts for controlling services. Instead of putting commands in ~/.bashrc or ~/.bash_profile, they can be started and stopped with termux-services. It manages a wide variety of back-end services such as apache httpd, lighttpd, nginx, ftpd, sshd, mysqld, postgres, mosquitto, crond, privoxy and more.
+[termux-services](https://github.com/termux/termux-services) contains a set of scripts for controlling services. Instead of putting commands in `~/.bashrc` or `~/.bash_profile`, they can be started and stopped with termux-services. It manages a wide variety of back-end services such as apache httpd, lighttpd, nginx, ftpd, sshd, mysqld, postgres, mosquitto, crond, privoxy and more.
 
 To install termux-services, run
 ```
@@ -187,21 +189,38 @@ To then enable and run a service, run
 ```
 sv-enable <service>
 ```
+
+for example
+```
+sv-enable nginx
+```
+
 If you only want to run it once, run
 ```
 sv up <service>
 ```
+for example
+```
+sv up mysqld
+```
+
 To later stop a service, run:
 ```
 sv down <service>
 ```
+for example
+```
+sv down mysqld
+```
+
 Or to disable it
 ```
 sv-disable <service>
 ```
+
 A service is disabled if `$PREFIX/var/service/<service>/down` exists, so the `sv-enable` and `sv-disable` scripts touches, or removes, this file.
 
-termux-services uses the programs from runit to control the services. A bunch of example scripts are available from the same site. If you find a script you want to use, or if you write your own, you can use set it up by running:
+termux-services uses the programs from [runit](http://smarden.org/runit/) to control the services. A bunch of example scripts are available from the [same site](http://smarden.org/runit/runscripts.html). If you find a script you want to use, or if you write your own, you can use set it up by running:
 ```
 mkdir -p $PREFIX/var/service/<PKG>/log
 ln -sf $PREFIX/share/termux-services/svlogger $PREFIX/var/service/<PKG>/log/run
@@ -214,7 +233,15 @@ sv up <PKG>
 ```
 to start it.
 
-Log files for services are situated in `$PREFIX/var/log/sv/<PKG>/ with the active log file named "current". 
+Log files for services are located in `$PREFIX/var/log/sv/<PKG>/` with the active log file named "current".
+
+For further configuration options check [termux wiki](https://wiki.termux.com/wiki/Termux-services) or [termux-services GitHub](https://github.com/termux/ttermux-services.
+
+### LEMP service scripts
+
+A couple of example scripts to start and stop LEMP services are also included in this repo. These scripts simplify the start and stop process for app developers.
+
+![service automation script output](res/lemp-updown-script.jpg)
 
 ## Test your Code
 

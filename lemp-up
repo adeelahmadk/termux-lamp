@@ -1,0 +1,13 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
+sv up mysqld &
+sleep 2
+sv up nginx &
+sleep 2
+sv up php-fpm &
+sleep 1
+if [ "$?" -eq 0 ]; then
+    echo "LEMP: services started successfully"
+else
+    echo "LEMP up: something went wrong!"
+fi
