@@ -2,6 +2,20 @@
 
 ![LEMP stack illustration](res/lemp-stack.jpg)
 
+1. [What's it all about?](#What's-it-all-about?)
+2. [Installation](#Installation)
+3. [Configuration](#Configuration)
+  1. [PHP](#PHP)
+  2. [Nginx](#Nginx)
+    - [Document Root](#Document-Root)
+  3. [MariaDB](#MariaDB)
+4. [Services](#Services)
+5. [Service Automation](#Service-Automation)
+  - [LEMP service scripts](#LEMP-service-scripts)
+6. [Test your Code](#Test-your-Code)
+
+## What's it all about?
+
 LEMP is a variation of the ubiquitous LAMP stack used for developing and deploying web applications written in PHP. Traditionally, LAMP consists of Linux, Apache, MySQL, and PHP. Due to its modular nature, the components can easily be swapped out. With LEMP, Apache is replaced with the lightweight yet powerful Nginx.
 
 A LAMP/LEMP stack may be setup in a variety of flavors:
@@ -57,7 +71,7 @@ listen = 127.0.0.1:9000
 listen = 9000
 ```
 
-### nginx
+### Nginx
 
 The nginx default config directory is located at `/data/data/com.termux/files/usr/etc/nginx` or `$PREFIX/etc/nginx`. Open`nginx.conf` and edit it as follows.
 
@@ -88,7 +102,7 @@ location ~ \.php$ {
 
 The original configuration file with proposed changes is included in the repo as `nginx.conf.full`. There's another cleaned up copy with comments & unnecessary configurations removed named as `nginx.conf`.
 
-### Document Root
+#### Document Root
 
 The document root is a directory from where a web server serves webpages. Its path is mentioned in the `nginx.conf`. The default root is set to `/data/data/com.termux/files/usr/share/nginx/html`.
 
@@ -235,7 +249,7 @@ to start it.
 
 Log files for services are located in `$PREFIX/var/log/sv/<PKG>/` with the active log file named "current".
 
-For further configuration options check [termux wiki](https://wiki.termux.com/wiki/Termux-services) or [termux-services GitHub](https://github.com/termux/ttermux-services.
+For further configuration options check [termux wiki](https://wiki.termux.com/wiki/Termux-services) or [termux-services GitHub](https://github.com/termux/ttermux-services).
 
 ### LEMP service scripts
 
