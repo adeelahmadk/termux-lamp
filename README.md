@@ -2,16 +2,16 @@
 
 ![LEMP stack illustration](res/lemp-stack.jpg)
 
-1. [What's it all about?](#What's-it-all-about?)
+1. [What's it all about?](#Whats-it-all-about?)
 2. [Installation](#Installation)
-3. [Configuration](#Configuration)
-  1. [PHP](#PHP)
-  2. [Nginx](#Nginx)
-    - [Document Root](#Document-Root)
-  3. [MariaDB](#MariaDB)
+3. [Configurations](#Configurations)
+    1. [PHP](#PHP)
+    2. [Nginx](#Nginx)
+        - [Document Root](#Document-Root)
+    3. [MariaDB](#MariaDB)
 4. [Services](#Services)
 5. [Service Automation](#Service-Automation)
-  - [LEMP service scripts](#LEMP-service-scripts)
+    - [LEMP service scripts](#LEMP-service-scripts)
 6. [Test your Code](#Test-your-Code)
 
 ## What's it all about?
