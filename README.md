@@ -1,4 +1,4 @@
-# LEMP Setup on Android
+# LAMP Setup on Android
 
 ![LEMP stack illustration](res/lemp-stack.jpg)
 
@@ -8,7 +8,8 @@
     1. [PHP](#PHP)
     2. [Nginx](#Nginx)
         - [Document Root](#Document-Root)
-    3. [MariaDB](#MariaDB)
+    3. [Apache](#Apache)
+    4. [MariaDB](#MariaDB)
 4. [Services](#Services)
 5. [Service Automation](#Service-Automation)
     - [LEMP service scripts](#LEMP-service-scripts)
@@ -16,7 +17,7 @@
 
 ## What's it all about?
 
-LEMP is a variation of the ubiquitous LAMP stack used for developing and deploying web applications written in PHP. Traditionally, LAMP consists of Linux, Apache, MySQL, and PHP. Due to its modular nature, the components can easily be swapped out. With LEMP, Apache is replaced with the lightweight yet powerful Nginx.
+The ubiquitous LAMP stack is used for developing and deploying web applications written in PHP. Traditionally, LAMP consists of Linux, Apache, MySQL, and PHP. Due to its modular nature, the components can easily be swapped out. With LEMP, Apache is replaced with the lightweight yet powerful Nginx.
 
 A LAMP/LEMP stack may be setup in a variety of flavors:
 
