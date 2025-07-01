@@ -1,0 +1,20 @@
+#!/data/data/com.termux/files/usr/bin/bash
+function log_status() {
+  if [ "$1" -eq 0 ]; then
+    echo "LAMP down: service ${2} stopped successfully"
+  else
+    echo "LAMP down: something went wrong with ${2}!"
+  fi
+}
+
+sv down mysqld &
+log_status $? mysqld
+sleep 1
+
+sv down php-fpm &
+log_status $? php-fpm
+sleep 1
+
+apachectl -k stop
+log_status $? apache2
+sleep 1

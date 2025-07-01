@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/sh
 
-sv down mysqld &
+sv down mariadbd &
 sleep 1
 sv down nginx &
 sleep 1

@@ -41,14 +41,23 @@ A number of online tutorials have emerged outlining setup process for some devel
 
 Inside your termux app install PHP, Nginx and MariaDB
 
-```sh
+```bash
 apt update && apt upgrade
 apt install php-fpm nginx mariadb
 ```
 
+or, with Apache httpd stack:
+
+```bash
+apt update && apt upgrade
+apt install php-fpm apache2 php-apache mariadb
+```
+This will install all the required componants.
+
 At the time of writing, the stack versions are:
 - PHP 8.1.11 (fpm-fcgi)
 - nginx/1.23.1
+- Apache httpd 2.24
 - mariadb  Ver 15.1 Distrib 10.9.2-MariaDB
 
 ## Configurations
@@ -122,6 +131,53 @@ ln -s $PREFIX/share/nginx/html $HOME/htdocs
 ```
 
 if you have setup the termux storage script, then you can place this soft link (or the document root itself) in your phone's sdcard. This'll simplify your workflow as you would be able to use a good code editor (like Acode etc.) to edit the php files.
+
+### Apache
+
+Insted of touching main config file `$PREFIX/etc/apache2/httpd.conf` we will create new config file that will be included in main config file.
+
+Create new file in `$PREFIX/etc/apache2/conf.d/`:`
+
+```bash
+nano $PREFIX/etc/apache2/conf.d/termux-php.conf
+```
+
+Copy the following code to that file and save.
+
+```
+AddHandler php-script .php
+
+ServerName 0.0.0.0
+
+<IfModule dir_module>
+        DirectoryIndex index.php
+</IfModule>
+
+LoadModule php_module libexec/apache2/libphp.so
+
+<IfModule !mpm_worker_module>
+        LoadModule mpm_prefork_module libexec/apache2/mod_mpm_prefork.so
+</IfModule>
+```
+now save and exit the text editor.
+ 
+Starting apache at this point we'll encouter an error: **PHP-Apache [Error – AH00013 : Pre-configuration failed]**.
+This is because Apache runs the `mpm_worker_module` by default and the PHP Module in termux is not compatible with it. We already added the compatible module `mpm_prefork_module` in the configuration. We just need to comment out the `LoadModule` line for `mpm_worker_module` in `httpd.conf`:
+
+```bash
+sed -i 's|LoadModule mpm_worker|#LoadModule mpm_worker|g' $PREFIX/etc/apache2/httpd.conf
+```
+The default Document Root of Apache2 HTTP Server is `$PREFIX/share/apache2/default-site/htdocs/`. We can change this setting in a `DocumentRoot` block in default configuration file.
+
+Start Apache2 Server
+```bash
+apachectl start
+```
+
+Or simply 
+```bash
+apachectl
+```
 
 ### MariaDB
 
@@ -239,7 +295,7 @@ termux-services uses the programs from [runit](http://smarden.org/runit/) to con
 mkdir -p $PREFIX/var/service/<PKG>/log
 ln -sf $PREFIX/share/termux-services/svlogger $PREFIX/var/service/<PKG>/log/run
 ```
-and then put your run script for the package at `$PREFIX/var/service/<PKG>/run` and make sure that it is runnable.
+and then put your run script for the package at `$PREFIX/var/service/<PKG>/run` and make sure it's runnable.
 
 You can then run
 ```
@@ -264,7 +320,7 @@ Finally, the moment of truth! Now that yor services are running, test some code.
 Now write a `index.php` file in your document root.
 
 ```php
-<php?
+<?php
 echo "<h1>Hello Android!</h1>";
 ```
 
