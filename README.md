@@ -1,6 +1,8 @@
 # LAMP Setup on Android
 
-![LEMP stack illustration](res/lemp-stack.jpg)
+![LAMP Stack Components](./res/lamp-stack.jpg)
+
+
 
 1. [What's it all about?](#Whats-it-all-about?)
 2. [Installation](#Installation)
@@ -27,7 +29,14 @@ A LAMP/LEMP stack may be setup in a variety of flavors:
 - lnpp(Linux + Nginx+ PostgreSQL+ PHP)
 - lapp(Linux + Apache+ PostgreSQL+ PHP)
 
+
+
+![LEMP stack illustration](res/lemp-stack.jpg)
+
+
+
 Commonly a LEMP Stack is setup on desktop or server Linux like:
+
 - CentOS(redhat) 7~8
 - Debian 8～11
 - Ubuntu 16～22
@@ -161,7 +170,7 @@ LoadModule php_module libexec/apache2/libphp.so
 </IfModule>
 ```
 now save and exit the text editor.
- 
+
 Starting apache at this point we'll encouter an error: **PHP-Apache [Error – AH00013 : Pre-configuration failed]**.
 This is because Apache runs the `mpm_worker_module` by default and the PHP Module in termux is not compatible with it. We already added the compatible module `mpm_prefork_module` in the configuration. We just need to comment out the `LoadModule` line for `mpm_worker_module` in `httpd.conf`:
 
